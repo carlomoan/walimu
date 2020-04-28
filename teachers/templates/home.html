@@ -1,0 +1,63 @@
+{% extends 'base-page.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Habari {{ user.username }}!
+  <p>Tafadhali chagua darasa unalofundisha </p>
+
+<div id="app">
+    <div class="row" v-for="result in results" v-bind:key="result.id">
+    <p><a class="nav-link text-black font-weight-bold" href="#">${ result.title }$</a></p>
+  </div>
+</div>
+
+<div id="app2">
+    <div class="row" v-for="mtaala in mtaalas">
+    <a class="nav-link text-black font-weight-bold"  href="#">${ mtaala.title }$</a>
+  </div>
+</div>
+
+<script>
+const url = "http://127.0.0.1:8000/darasa_list";
+const url1 = "http://127.0.0.1:8000/curricula_list";
+new Vue({
+  delimiters: ['${', '}$'],
+  el: '#app',
+
+  data: {
+    results: []
+  },
+   mounted() {
+          axios.get(url).then(response => {
+            this.results = response.data
+          })
+        }
+        
+}
+)
+
+new Vue({
+  delimiters: ['${', '}$'],
+  el: '#app2',
+
+  data: {
+    mtaalas: []
+  },
+   mounted() {
+          axios.get(url1+this.$route.params.id).then(response => {
+            this.mtaalas = response.data
+          })
+        }
+}
+)
+</script>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'teachers:login' %}">login</a>
+{% endif %}
+{% endblock %}
+
+

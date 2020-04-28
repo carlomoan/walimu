@@ -1,0 +1,20 @@
+{% extends 'base-page.html' %}
+
+{% block title %} Darasa {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'teachers:login' %}">login</a>
+{% endif %}
+{% endblock %}
+
+<section id="darasa">
+    {% for darasa in darasas %}
+    <a class="nav-link text-black font-weight-bold"  href="{% url 'teachers:darasas' %}">{{darasa.title}}</a>
+    {% endfor %}
+</section>
