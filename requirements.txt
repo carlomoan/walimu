@@ -3,7 +3,7 @@ autopep8==1.5
 django-cors-headers==3.2.1
 django-templated-mail==1.1.1
 django-webpack-loader==0.6.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-simplejwt==4.4.0
 djoser==2.0.3
 mysqlclient==1.4.6
